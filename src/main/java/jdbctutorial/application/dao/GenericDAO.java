@@ -11,7 +11,7 @@ public interface GenericDAO<T, ID> {
 
     void save(T t) throws SQLException;
 
-    void update(T t);
+    void update(T t) throws SQLException;
 
-    void delete(T t);
+    void delete(T t) throws SQLException;
 }

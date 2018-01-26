@@ -94,7 +94,7 @@ public class DeveloperDAOImpl implements DeveloperDAO {
     public void save(Developer developer) throws SQLException {
         PreparedStatement preparedStatement = null;
 
-        String sql = "INSERT INTO Developer (id, first_name, last_name, specialty, salary) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO Developers (id, first_name, last_name, specialty, salary) VALUES (?,?,?,?,?)";
 
         try {
             preparedStatement = ConnectionUtil.getConnection().prepareStatement(sql);
@@ -120,12 +120,52 @@ public class DeveloperDAOImpl implements DeveloperDAO {
     }
 
     @Override
-    public void update(Developer developer) {
+    public void update(Developer developer) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        String sql = "UPDATE Developers SET ID=?, FIRST_NAME=?, LAST_NAME=?, SPECIALTY=?, SALARY=?";
 
+        try {
+            preparedStatement = ConnectionUtil.getConnection().prepareStatement(sql);
+
+            preparedStatement.setLong(1, developer.getId());
+            preparedStatement.setString(2, developer.getFirstName());
+            preparedStatement.setString(3, developer.getLastName());
+            preparedStatement.setString(4, developer.getSpecialty());
+            preparedStatement.setBigDecimal(5, developer.getSalary());
+
+            preparedStatement.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement.getConnection() != null) {
+                preparedStatement.getConnection().close();
+            }
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
     }
 
     @Override
-    public void delete(Developer developer) {
+    public void delete(Developer developer) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        String sql = "DELETE FROM Developers WHERE ID=?";
 
+        try {
+            preparedStatement = ConnectionUtil.getConnection().prepareStatement(sql);
+            preparedStatement.setLong(1, developer.getId());
+
+            preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement.getConnection() != null) {
+                preparedStatement.getConnection().close();
+            }
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
     }
 }
