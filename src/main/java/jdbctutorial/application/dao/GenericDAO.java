@@ -9,7 +9,7 @@ public interface GenericDAO<T, ID> {
 
     List<T> getAll();
 
-    void save(T t);
+    void save(T t) throws SQLException;
 
     void update(T t);
 

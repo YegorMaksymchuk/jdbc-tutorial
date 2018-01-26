@@ -43,7 +43,13 @@ public class DeveloperDAOImpl implements DeveloperDAO {
     }
 
     @Override
-    public void save(Developer developer) {
+    public void save(Developer developer) throws SQLException {
+        String sql = "INSERT INTO developers(id, first_name, last_name, specialty, salary) VALUES \t\n" +
+                "\t(1, 'John', 'Smith',   'C++', 3000.00);";
+        Statement statement = ConnectionUtil.getConnection().createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+
 
     }
 
