@@ -94,7 +94,7 @@ public class DeveloperDAOImpl implements DeveloperDAO {
     public void save(Developer developer) throws SQLException {
         PreparedStatement preparedStatement = null;
 
-        String sql = "INSERT INTO Developers (id, first_name, last_name, specialty, salary) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO developers (id, first_name, last_name, specialty, salary) VALUES (?,?,?,?,?)";
 
         try {
             preparedStatement = ConnectionUtil.getConnection().prepareStatement(sql);
@@ -105,7 +105,7 @@ public class DeveloperDAOImpl implements DeveloperDAO {
             preparedStatement.setString(4, developer.getSpecialty());
             preparedStatement.setBigDecimal(5, developer.getSalary());
 
-            preparedStatement.executeQuery();
+            preparedStatement.execute();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -122,7 +122,7 @@ public class DeveloperDAOImpl implements DeveloperDAO {
     @Override
     public void update(Developer developer) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE Developers SET ID=?, FIRST_NAME=?, LAST_NAME=?, SPECIALTY=?, SALARY=?";
+        String sql = "UPDATE developers SET FIRST_NAME=?, LAST_NAME=?, SPECIALTY=?, SALARY=? WHERE ID=?";
 
         try {
             preparedStatement = ConnectionUtil.getConnection().prepareStatement(sql);
@@ -133,7 +133,7 @@ public class DeveloperDAOImpl implements DeveloperDAO {
             preparedStatement.setString(4, developer.getSpecialty());
             preparedStatement.setBigDecimal(5, developer.getSalary());
 
-            preparedStatement.executeQuery();
+            preparedStatement.execute();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -150,7 +150,7 @@ public class DeveloperDAOImpl implements DeveloperDAO {
     @Override
     public void delete(Developer developer) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "DELETE FROM Developers WHERE ID=?";
+        String sql = "DELETE FROM developers WHERE ID=?";
 
         try {
             preparedStatement = ConnectionUtil.getConnection().prepareStatement(sql);
