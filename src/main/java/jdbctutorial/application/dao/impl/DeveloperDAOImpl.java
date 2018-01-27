@@ -123,17 +123,17 @@ public class DeveloperDAOImpl implements DeveloperDAO {
     public void update(Developer developer) throws SQLException {
         PreparedStatement preparedStatement = null;
         String sql = "UPDATE developers SET FIRST_NAME=?, LAST_NAME=?, SPECIALTY=?, SALARY=? WHERE ID=?";
-
+        int i;
         try {
             preparedStatement = ConnectionUtil.getConnection().prepareStatement(sql);
 
-            preparedStatement.setLong(1, developer.getId());
-            preparedStatement.setString(2, developer.getFirstName());
-            preparedStatement.setString(3, developer.getLastName());
-            preparedStatement.setString(4, developer.getSpecialty());
-            preparedStatement.setBigDecimal(5, developer.getSalary());
+            preparedStatement.setString(1, developer.getFirstName());
+            preparedStatement.setString(2, developer.getLastName());
+            preparedStatement.setString(3, developer.getSpecialty());
+            preparedStatement.setBigDecimal(4, developer.getSalary());
+            preparedStatement.setLong(5, developer.getId());
 
-            preparedStatement.execute();
+            i = preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();

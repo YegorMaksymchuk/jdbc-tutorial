@@ -1,6 +1,6 @@
 CREATE SCHEMA jdbc_tutorial DEFAULT CHARACTER SET utf8mb4;
 
-USE jdbc_tutorial
+USE jdbc_tutorial;
 CREATE TABLE developers(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	first_name VARCHAR(50) NOT NULL,

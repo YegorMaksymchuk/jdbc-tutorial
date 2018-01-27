@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class JdbcDemo {
-    public static void showAllDevs(DeveloperDAO developerDAO) {
+    public static void showAllDev(DeveloperDAO developerDAO) {
         List<Developer> developerList = developerDAO.getAll();
 
         for (int i = 0; i < developerList.size(); i++) {
@@ -42,17 +42,15 @@ public class JdbcDemo {
     public static void main(String[] args) throws SQLException {
         DeveloperDAO developerDAO = new DeveloperDAOImpl();
 
-        showAllDevs(developerDAO);
+        showAllDev(developerDAO);
 
         showDevById(developerDAO, 1L);
 
         developerDAO.save(getNewDev());
 
-        showAllDevs(developerDAO);
+        showAllDev(developerDAO);
 
         showAndUpdateDevSpecialty(developerDAO.getById(1L), "Ruby", developerDAO);
-
-
     }
 }
 
