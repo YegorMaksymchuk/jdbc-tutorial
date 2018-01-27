@@ -85,8 +85,6 @@ public class DeveloperDAOImpl implements DeveloperDAO {
                 e.printStackTrace();
             }
         }
-
-
         return developersList;
     }
 
@@ -123,7 +121,7 @@ public class DeveloperDAOImpl implements DeveloperDAO {
     public void update(Developer developer) throws SQLException {
         PreparedStatement preparedStatement = null;
         String sql = "UPDATE developers SET FIRST_NAME=?, LAST_NAME=?, SPECIALTY=?, SALARY=? WHERE ID=?";
-        int i;
+        int resultExecution;
         try {
             preparedStatement = ConnectionUtil.getConnection().prepareStatement(sql);
 
@@ -133,7 +131,7 @@ public class DeveloperDAOImpl implements DeveloperDAO {
             preparedStatement.setBigDecimal(4, developer.getSalary());
             preparedStatement.setLong(5, developer.getId());
 
-            i = preparedStatement.executeUpdate();
+            resultExecution = preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
