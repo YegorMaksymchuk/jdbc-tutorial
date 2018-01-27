@@ -1,3 +1,9 @@
+https://docs.oracle.com/cd/E11882_01/java.112/e16548/toc.htm
+
+https://docs.oracle.com/cd/E13222_01/wls/docs103/jdbc_admin/config.html
+
+https://docs.oracle.com/cd/E13222_01/wls/docs81/ConsoleHelp/jdbc_connection_pools.html
+
 Driver - Manager Этот элемент управляет списком драйверов БД.
     Каждой запрос на соединение требует соответствующего драйвера.
     Первое совпадение даёт нам соединение.
@@ -15,3 +21,4 @@ ResultSet - Экземпляры этого элемента содержат д
     Он работает как итератор и “пробегает” по полученным данным.
 
 SQL Exception - Этот класс обрабатывает все ошибки, которые могут возникнуть при работе с БД.
+
