@@ -24,7 +24,7 @@ public class JdbcDemo {
         developer.setFirstName("Petro");
         developer.setLastName("Ivanov");
         developer.setSpecialty("Go");
-        developer.setSalary(BigDecimal.valueOf(300.00));
+        developer.setSalary(BigDecimal.valueOf(3000.00));
         return developer;
     }
 
@@ -35,22 +35,22 @@ public class JdbcDemo {
     }
 
     public static void showDevById(DeveloperDAO developerDAO, Long id) throws SQLException {
-        developerDAO.getById(id);
+        System.out.println(developerDAO.getById(id));
     }
 
 
     public static void main(String[] args) throws SQLException {
         DeveloperDAO developerDAO = new DeveloperDAOImpl();
 
-        showAllDev(developerDAO);
+//        showAllDev(developerDAO);
 
-        showDevById(developerDAO, 1L);
-
-        developerDAO.save(getNewDev());
-
-        showAllDev(developerDAO);
-
-        showAndUpdateDevSpecialty(developerDAO.getById(1L), "Ruby", developerDAO);
+//        showDevById(developerDAO, 1L);
+//
+//        developerDAO.save(getNewDev());
+//
+//        showAllDev(developerDAO);
+//
+//        showAndUpdateDevSpecialty(developerDAO.getById(1L), "Ruby", developerDAO);
     }
 }
 
