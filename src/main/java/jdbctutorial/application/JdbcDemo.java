@@ -5,6 +5,7 @@ import jdbctutorial.application.dao.DeveloperDAO;
 import jdbctutorial.application.dao.impl.DeveloperDAOImpl;
 import jdbctutorial.application.dao.impl.ProjectDAOImpl;
 import jdbctutorial.application.model.Developer;
+import jdbctutorial.application.model.Project;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -55,6 +56,12 @@ public class JdbcDemo {
 
         ProjectDAOImpl projectDAO = new ProjectDAOImpl();
         System.out.println(projectDAO.getById(1l));
+
+        projectDAO.getAll().forEach(i-> System.out.println(i));
+
+        projectDAO.save(new Project(3l,"Tomcat","Servlet container develop by apache fundation"));
+
+        projectDAO.assignDeveloperToProject(developerDAO.getById(5L), projectDAO.getById(3l));
 
         projectDAO.getAll().forEach(i-> System.out.println(i));
     }

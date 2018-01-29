@@ -93,6 +93,7 @@ public class ProjectDAOImpl implements ProjectDAO {
             preparedStatement.setString(3, project.getInfo());
 
             preparedStatement.execute();
+            preparedStatement.getConnection().commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -119,6 +120,7 @@ public class ProjectDAOImpl implements ProjectDAO {
             preparedStatement.setLong(3, project.getId());
 
             resultExecution = preparedStatement.executeUpdate();
+            preparedStatement.getConnection().commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -142,6 +144,7 @@ public class ProjectDAOImpl implements ProjectDAO {
             preparedStatement.setLong(1, project.getId());
 
             preparedStatement.executeQuery();
+//            preparedStatement.getConnection().commit();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -168,6 +171,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 
 
             preparedStatement.execute();
+            preparedStatement.getConnection().commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
