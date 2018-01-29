@@ -18,13 +18,13 @@ public class JdbcDemo {
         }
     }
 
-    public static Developer getNewDev() {
+    public static Developer getNewDev(Long id, String name, String lastName, String specialty, BigDecimal salary) {
         Developer developer = new Developer();
-        developer.setId(7L);
-        developer.setFirstName("Petro");
-        developer.setLastName("Ivanov");
-        developer.setSpecialty("Go");
-        developer.setSalary(BigDecimal.valueOf(3000.00));
+        developer.setId(id);
+        developer.setFirstName(name);
+        developer.setLastName(lastName);
+        developer.setSpecialty(specialty);
+        developer.setSalary(salary);
         return developer;
     }
 
@@ -46,7 +46,7 @@ public class JdbcDemo {
 
 //        showDevById(developerDAO, 1L);
 //
-//        developerDAO.save(getNewDev());
+//        developerDAO.save(getNewDev(7L,"Petro", "Ivanov", "Go", BigDecimal.valueOf(3000.00)));
 //
 //        showAllDev(developerDAO);
 //
