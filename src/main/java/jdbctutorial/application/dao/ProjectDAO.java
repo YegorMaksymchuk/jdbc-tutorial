@@ -1,5 +1,6 @@
 package jdbctutorial.application.dao;
 
+import jdbctutorial.application.model.Developer;
 import jdbctutorial.application.model.Project;
 
 import java.sql.SQLException;
@@ -21,4 +22,6 @@ public interface ProjectDAO extends GenericDAO<Project, Long> {
 
     @Override
     void delete(Project project) throws SQLException;
+
+    void assignDeveloperToProject(Developer developer, Project project) throws SQLException;
 }
