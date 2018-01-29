@@ -17,8 +17,9 @@ VALUES
 	(4, 'Olivia', 'Evans', 'Java', 3000.00),
 	(5, 'Daniel', 'Smith', 'Java', 3000.00);
   
+SELECT * FROM developers;
 
-ALTER TABLE developers ADD COLUMN photo BLOB AFTER slary;
+ALTER TABLE developers ADD COLUMN photo BLOB AFTER salary;
 
 
 

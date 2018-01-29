@@ -7,6 +7,7 @@ import jdbctutorial.application.dao.impl.ProjectDAOImpl;
 import jdbctutorial.application.model.Developer;
 import jdbctutorial.application.model.Project;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
@@ -41,7 +42,7 @@ public class JdbcDemo {
     }
 
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, IOException {
         DeveloperDAO developerDAO = new DeveloperDAOImpl();
 
 //        showAllDev(developerDAO);
@@ -54,16 +55,21 @@ public class JdbcDemo {
 //
 //        showAndUpdateDevSpecialty(developerDAO.getById(1L), "Ruby", developerDAO);
 
-        ProjectDAOImpl projectDAO = new ProjectDAOImpl();
-        System.out.println(projectDAO.getById(1l));
+//        ProjectDAOImpl projectDAO = new ProjectDAOImpl();
+//        System.out.println(projectDAO.getById(1l));
 
-        projectDAO.getAll().forEach(i-> System.out.println(i));
 
-        projectDAO.save(new Project(3l,"Tomcat","Servlet container develop by apache fundation"));
+//        developerDAO.save(getNewDev(8L,"asdasd","xzczxczxczxc","",BigDecimal.valueOf(400.00)));
 
-        projectDAO.assignDeveloperToProject(developerDAO.getById(5L), projectDAO.getById(3l));
+        developerDAO.addPhoto(developerDAO.getById(1L), "src/main/resources/developerphoto/chebur.jpg");
 
-        projectDAO.getAll().forEach(i-> System.out.println(i));
+//        projectDAO.getAll().forEach(i-> System.out.println(i));
+
+//        projectDAO.save(new Project(3l,"Tomcat","Servlet container develop by apache fundation"));
+
+//        projectDAO.assignDeveloperToProject(developerDAO.getById(5L), projectDAO.getById(3l));
+
+//        projectDAO.getAll().forEach(i-> System.out.println(i));
     }
 }
 
