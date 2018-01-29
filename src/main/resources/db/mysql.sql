@@ -20,4 +20,13 @@ VALUES
 
 ALTER TABLE developers ADD COLUMN photo BLOB AFTER slary;
 
+
+
+CREATE TABLE projects(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(50) NOT NULL,
+	info VARCHAR(100)
+);
+
+
 DROP TABLE developers;

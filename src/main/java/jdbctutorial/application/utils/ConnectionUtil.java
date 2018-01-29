@@ -22,4 +22,10 @@ public class ConnectionUtil {
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASS);
     }
+
+    public static Connection getConnectionAutoCommitFalse() throws SQLException {
+        Connection connection = DriverManager.getConnection(URL, USER, PASS);
+        connection.setAutoCommit(false);
+        return connection;
+    }
 }
