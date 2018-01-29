@@ -3,6 +3,7 @@ package jdbctutorial.application;
 
 import jdbctutorial.application.dao.DeveloperDAO;
 import jdbctutorial.application.dao.impl.DeveloperDAOImpl;
+import jdbctutorial.application.dao.impl.ProjectDAOImpl;
 import jdbctutorial.application.model.Developer;
 
 import java.math.BigDecimal;
@@ -51,6 +52,11 @@ public class JdbcDemo {
 //        showAllDev(developerDAO);
 //
 //        showAndUpdateDevSpecialty(developerDAO.getById(1L), "Ruby", developerDAO);
+
+        ProjectDAOImpl projectDAO = new ProjectDAOImpl();
+        System.out.println(projectDAO.getById(1l));
+
+        projectDAO.getAll().forEach(i-> System.out.println(i));
     }
 }
 

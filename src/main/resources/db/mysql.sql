@@ -28,5 +28,18 @@ CREATE TABLE projects(
 	info VARCHAR(100)
 );
 
+INSERT INTO projects (id, name, info) values (1, 'JBoss', 'RedHat implamintation of WildFly'),(2,'Openshift', 'RedHat cloud devops platform');
+
+CREATE TABLE developer_projects(
+	developer_id INT NOT NULL,
+	project_id INT NOT NULL,
+	PRIMARY KEY(developer_id, project_id),
+	FOREIGN KEY(developer_id) REFERENCES developers (id),
+	FOREIGN KEY(project_id) REFERENCES projects (id)
+);
+
+INSERT INTO developer_projects (developer_id, project_id) values (1,1),(2,1),(3,1),(4,2);
 
 DROP TABLE developers;
+DROP TABLE projects;
+DROP TABLE developer_projects;
