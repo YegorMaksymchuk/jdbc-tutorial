@@ -19,10 +19,6 @@ VALUES
   
 SELECT * FROM developers;
 
-ALTER TABLE developers ADD COLUMN photo BLOB AFTER salary;
-
-
-
 CREATE TABLE projects(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(50) NOT NULL,
@@ -41,6 +37,4 @@ CREATE TABLE developer_projects(
 
 INSERT INTO developer_projects (developer_id, project_id) values (1,1),(2,1),(3,1),(4,2);
 
-DROP TABLE developers;
-DROP TABLE projects;
-DROP TABLE developer_projects;
+DROP SCHEMA `jdbc_tutorial`;
