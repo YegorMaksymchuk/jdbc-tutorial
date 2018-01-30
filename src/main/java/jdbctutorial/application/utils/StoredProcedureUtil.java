@@ -1,26 +1,25 @@
 package jdbctutorial.application.utils;
 
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+;
 
 public class StoredProcedureUtil {
 
     public void createStoredProcedure() throws SQLException {
-
-        String createProcedure = null;
-
         deleteStoredProcedure("show_developers_by_project");
 
-        createProcedure =
-                "CREATE PROCEDURE show_developers_by_project() " +
-                        "BEGIN " +
-                        "SELECT DISTINCT developers.first_name,\n" +
-                        "projects.name\n" +
-                        "FROM developers \n" +
-                        "INNER JOIN projects\n" +
-                        "order by projects.name;" +
-                        "end";
+        String createProcedure = "CREATE PROCEDURE show_developers_by_project() " +
+                "BEGIN " +
+                "SELECT DISTINCT developers.first_name," +
+                "projects.name" +
+                "FROM developers " +
+                "INNER JOIN projects" +
+                "order by projects.name;" +
+                "end";
 
         Statement statement = ConnectionUtil.getConnection().createStatement();
         try {
@@ -35,23 +34,43 @@ public class StoredProcedureUtil {
 
     }
 
-    public void callStoredProcedure(String soredProcedureName) {
+    public Map<String,String> callStoredProcedure(String soredProcedureName) throws SQLException {
+        Map<String, String> developersByProject = new HashMap<>();
+        Connection connection = null;
+        String procedureCall = "call.jdbc_tutorial." + soredProcedureName;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionUtil.getConnection();
+            CallableStatement callableStatement = connection.prepareCall(procedureCall);
+            rs = callableStatement.executeQuery();
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+        }
+
+
+        return developersByProject;
     }
 
     public void deleteStoredProcedure(String soredProcedureName) throws SQLException {
         String queryDrop = "DROP PROCEDURE IF EXISTS " + soredProcedureName;
         Connection con = ConnectionUtil.getConnection();
-        Statement stmtDrop = null;
+        Statement statement = null;
         try {
-            System.out.println("Calling DROP PROCEDURE");
-            stmtDrop = con.createStatement();
-            stmtDrop.execute();
+            statement = con.createStatement();
+            statement.execute(queryDrop);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (stmtDrop != null) {
-                stmtDrop.close();
+            if (statement != null) {
+                statement.close();
+            }
+            if (con != null) {
+                con.close();
             }
         }
     }

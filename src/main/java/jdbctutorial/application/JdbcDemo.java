@@ -6,6 +6,7 @@ import jdbctutorial.application.dao.impl.DeveloperDAOImpl;
 import jdbctutorial.application.dao.impl.ProjectDAOImpl;
 import jdbctutorial.application.model.Developer;
 import jdbctutorial.application.model.Project;
+import jdbctutorial.application.utils.StoredProcedureUtil;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -61,7 +62,7 @@ public class JdbcDemo {
 
 //        developerDAO.save(getNewDev(8L,"asdasd","xzczxczxczxc","",BigDecimal.valueOf(400.00)));
 
-        developerDAO.addPhoto(developerDAO.getById(1L), "src/main/resources/developerphoto/chebur.jpg");
+//        developerDAO.addPhoto(developerDAO.getById(1L), "src/main/resources/developerphoto/chebur.jpg");
 
 //        projectDAO.getAll().forEach(i-> System.out.println(i));
 
@@ -70,6 +71,10 @@ public class JdbcDemo {
 //        projectDAO.assignDeveloperToProject(developerDAO.getById(5L), projectDAO.getById(3l));
 
 //        projectDAO.getAll().forEach(i-> System.out.println(i));
+
+        StoredProcedureUtil storedProcedureUtil = new StoredProcedureUtil();
+        storedProcedureUtil.createStoredProcedure();
+        storedProcedureUtil.callStoredProcedure("show_developers_by_project");
     }
 }
 
