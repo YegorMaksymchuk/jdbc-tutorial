@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import static java.sql.Connection.TRANSACTION_SERIALIZABLE;
+
 public class ConnectionUtil {
 
     public static final String DRIVER = ConfigUtil.getProp("driver"); //"com.mysql.jdbc.Driver";

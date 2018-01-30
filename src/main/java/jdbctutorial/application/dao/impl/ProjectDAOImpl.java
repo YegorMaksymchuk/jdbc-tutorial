@@ -5,18 +5,18 @@ import jdbctutorial.application.model.Developer;
 import jdbctutorial.application.model.Project;
 import jdbctutorial.application.utils.ConnectionUtil;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.sql.Connection.TRANSACTION_READ_COMMITTED;
 
 public class ProjectDAOImpl implements ProjectDAO {
     @Override
     public Project getById(Long id) throws SQLException {
         String sql = "SELECT * FROM projects WHERE id = " + id;
-        Statement statement = ConnectionUtil.getConnectionAutoCommitFalse().createStatement();
+//        ConnectionUtil.getConnection().setTransactionIsolation(TRANSACTION_READ_COMMITTED);
+        Statement statement = ConnectionUtil.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
         Project project = null;
