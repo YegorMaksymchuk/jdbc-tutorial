@@ -9,6 +9,8 @@ CREATE TABLE developers(
 	salary DECIMAL(10, 2) NOT NULL
 );
 
+COMMIT;
+
 INSERT INTO developers(id, first_name, last_name, specialty, salary)
 VALUES 	
 	(1, 'John', 'Smith',   'C++', 3000.00),
@@ -19,6 +21,7 @@ VALUES
   
 SELECT * FROM developers;
 
+USE jdbc_tutorial;
 CREATE TABLE projects(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(50) NOT NULL,
@@ -27,6 +30,7 @@ CREATE TABLE projects(
 
 INSERT INTO projects (id, name, info) values (1, 'JBoss', 'RedHat implamintation of WildFly'),(2,'Openshift', 'RedHat cloud devops platform');
 
+USE jdbc_tutorial;
 CREATE TABLE developer_projects(
 	developer_id INT NOT NULL,
 	project_id INT NOT NULL,
@@ -36,5 +40,14 @@ CREATE TABLE developer_projects(
 );
 
 INSERT INTO developer_projects (developer_id, project_id) values (1,1),(2,1),(3,1),(4,2);
+
+USE jdbc_tutorial;
+CREATE TABLE developer_avatar(
+	developer_id INT NOT NULL,
+	avatar blob  (1G),
+	cv CLOB (1G CHARACTERS),
+	PRIMARY KEY(developer_id),
+	FOREIGN KEY(developer_id) REFERENCES developers (id),
+);
 
 DROP SCHEMA `jdbc_tutorial`;

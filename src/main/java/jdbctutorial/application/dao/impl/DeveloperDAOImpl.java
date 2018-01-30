@@ -168,44 +168,4 @@ public class DeveloperDAOImpl implements DeveloperDAO {
             }
         }
     }
-
-    @Override
-    public void addPhoto(Developer developer, String path) throws SQLException, IOException {
-        PreparedStatement preparedStatement = null;
-        String sql = "UPDATE developers SET PHOTO=? WHERE ID=?";
-
-        int resultExecution;
-        try {
-
-            BufferedImage photo = ImageIO.read(new File(path));
-
-            Blob blob = ConnectionUtil.getConnection().createBlob();
-
-            try (OutputStream os = blob.setBinaryStream(1);) {
-                ImageIO.write(photo, "jpg", os);
-            }
-            preparedStatement = ConnectionUtil.getConnection().prepareStatement(sql);
-            preparedStatement.setBlob(1, blob);
-            preparedStatement.setLong(2, developer.getId());
-
-            resultExecution = preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (preparedStatement.getConnection() != null) {
-                preparedStatement.getConnection().close();
-            }
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-        }
-    }
-
-    @Override
-    public File getPhoto(Developer developer) {
-        return null;
-    }
 }

@@ -2,10 +2,10 @@ package jdbctutorial.application;
 
 
 import jdbctutorial.application.dao.DeveloperDAO;
+import jdbctutorial.application.dao.ProjectDAO;
 import jdbctutorial.application.dao.impl.DeveloperDAOImpl;
 import jdbctutorial.application.dao.impl.ProjectDAOImpl;
 import jdbctutorial.application.model.Developer;
-import jdbctutorial.application.model.Project;
 import jdbctutorial.application.utils.StoredProcedureUtil;
 
 import java.io.IOException;
@@ -23,7 +23,7 @@ public class JdbcDemo {
         }
     }
 
-    public static Developer getNewDev(Long id, String name, String lastName, String specialty, BigDecimal salary) {
+    public static Developer createDeveloper(Long id, String name, String lastName, String specialty, BigDecimal salary) {
         Developer developer = new Developer();
         developer.setId(id);
         developer.setFirstName(name);
@@ -47,31 +47,18 @@ public class JdbcDemo {
     public static void main(String[] args) throws SQLException, IOException {
         DeveloperDAO developerDAO = new DeveloperDAOImpl();
 
-//        showAllDev(developerDAO);
+        showAllDev(developerDAO);
 
-//        showDevById(developerDAO, 1L);
-//
-//        developerDAO.save(getNewDev(7L,"Petro", "Ivanov", "Go", BigDecimal.valueOf(3000.00)));
-//
-//        showAllDev(developerDAO);
-//
-//        showAndUpdateDevSpecialty(developerDAO.getById(1L), "Ruby", developerDAO);
+        showDevById(developerDAO, 1L);
 
-//        ProjectDAOImpl projectDAO = new ProjectDAOImpl();
-//        System.out.println(projectDAO.getById(1l));
+        developerDAO.save(createDeveloper(7L,"Petro", "Ivanov", "Go", BigDecimal.valueOf(3000.00)));
 
+        showAllDev(developerDAO);
 
-//        developerDAO.save(getNewDev(8L,"asdasd","xzczxczxczxc","",BigDecimal.valueOf(400.00)));
+        showAndUpdateDevSpecialty(developerDAO.getById(1L), "Ruby", developerDAO);
 
-//        developerDAO.addPhoto(developerDAO.getById(1L), "src/main/resources/developerphoto/chebur.jpg");
-
-//        projectDAO.getAll().forEach(i-> System.out.println(i));
-
-//        projectDAO.save(new Project(3l,"Tomcat","Servlet container develop by apache fundation"));
-
-//        projectDAO.assignDeveloperToProject(developerDAO.getById(5L), projectDAO.getById(3l));
-
-//        projectDAO.getAll().forEach(i-> System.out.println(i));
+        ProjectDAO projectDAO = new ProjectDAOImpl();
+        System.out.println(projectDAO.getById(1l));
 
         StoredProcedureUtil storedProcedureUtil = new StoredProcedureUtil();
         storedProcedureUtil.createStoredProcedure();
