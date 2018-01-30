@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public class JdbcDemo {
     public static void showAllDev(DeveloperDAO developerDAO) {
@@ -74,7 +75,13 @@ public class JdbcDemo {
 
         StoredProcedureUtil storedProcedureUtil = new StoredProcedureUtil();
         storedProcedureUtil.createStoredProcedure();
-        storedProcedureUtil.callStoredProcedure("show_developers_by_project");
+        printMap(storedProcedureUtil.callStoredProcedure("show_developers_by_project"));
+    }
+
+
+    public static <K, V> void printMap(Map<K, V> map) {
+        for (Map.Entry<K, V> entry : map.entrySet()) {
+            System.out.println("| Developer name : " + entry.getKey() +" | "+ " Project name : " + entry.getValue() +" |");
+        }
     }
 }
-

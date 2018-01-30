@@ -13,12 +13,12 @@ public class StoredProcedureUtil {
         deleteStoredProcedure("show_developers_by_project");
 
         String createProcedure = "CREATE PROCEDURE show_developers_by_project() " +
-                "BEGIN " +
+                "BEGIN \n" +
                 "SELECT DISTINCT developers.first_name," +
-                "projects.name" +
-                "FROM developers " +
-                "INNER JOIN projects" +
-                "order by projects.name;" +
+                "projects.name \n" +
+                "FROM developers \n" +
+                "INNER JOIN projects \n" +
+                "order by projects.name; \n" +
                 "end";
 
         Statement statement = ConnectionUtil.getConnection().createStatement();
@@ -37,12 +37,15 @@ public class StoredProcedureUtil {
     public Map<String,String> callStoredProcedure(String soredProcedureName) throws SQLException {
         Map<String, String> developersByProject = new HashMap<>();
         Connection connection = null;
-        String procedureCall = "call.jdbc_tutorial." + soredProcedureName;
+        String procedureCall = "{call jdbc_tutorial." + soredProcedureName +"()}";
         ResultSet rs = null;
         try {
             connection = ConnectionUtil.getConnection();
             CallableStatement callableStatement = connection.prepareCall(procedureCall);
             rs = callableStatement.executeQuery();
+            while (rs.next()){
+                developersByProject.put(rs.getString("first_name"), rs.getString("name"));
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
