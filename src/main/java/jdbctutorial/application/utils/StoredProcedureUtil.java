@@ -34,6 +34,25 @@ public class StoredProcedureUtil {
 
     }
 
+    public void deleteStoredProcedure(String soredProcedureName) throws SQLException {
+        String queryDrop = "DROP PROCEDURE IF EXISTS " + soredProcedureName;
+        Connection con = ConnectionUtil.getConnection();
+        Statement statement = null;
+        try {
+            statement = con.createStatement();
+            statement.execute(queryDrop);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
     public Map<String,String> callStoredProcedure(String soredProcedureName) throws SQLException {
         Map<String, String> developersByProject = new HashMap<>();
         Connection connection = null;
@@ -55,25 +74,6 @@ public class StoredProcedureUtil {
             }
         }
         return developersByProject;
-    }
-
-    public void deleteStoredProcedure(String soredProcedureName) throws SQLException {
-        String queryDrop = "DROP PROCEDURE IF EXISTS " + soredProcedureName;
-        Connection con = ConnectionUtil.getConnection();
-        Statement statement = null;
-        try {
-            statement = con.createStatement();
-            statement.execute(queryDrop);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                statement.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
     }
 
 }

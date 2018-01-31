@@ -15,7 +15,7 @@ public class ProjectDAOImpl implements ProjectDAO {
     @Override
     public Project getById(Long id) throws SQLException {
         String sql = "SELECT * FROM projects WHERE id = " + id;
-//        ConnectionUtil.getConnection().setTransactionIsolation(TRANSACTION_READ_COMMITTED);
+        ConnectionUtil.getConnection().setTransactionIsolation(TRANSACTION_READ_COMMITTED);
         Statement statement = ConnectionUtil.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
@@ -25,6 +25,7 @@ public class ProjectDAOImpl implements ProjectDAO {
             Long projectId = resultSet.getLong("id");
             String name = resultSet.getString("name");
             String info = resultSet.getString("info");
+
             project = new Project(projectId, name, info);
         }
 
@@ -143,8 +144,8 @@ public class ProjectDAOImpl implements ProjectDAO {
             preparedStatement = ConnectionUtil.getConnectionAutoCommitFalse().prepareStatement(sql);
             preparedStatement.setLong(1, project.getId());
 
-            preparedStatement.executeQuery();
-//            preparedStatement.getConnection().commit();
+            preparedStatement.executeUpdate();
+            preparedStatement.getConnection().commit();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
