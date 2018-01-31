@@ -1,5 +1,5 @@
 CREATE SCHEMA jdbc_tutorial DEFAULT CHARACTER SET utf8mb4;
-
+COMMIT;
 USE jdbc_tutorial;
 CREATE TABLE developers(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -8,8 +8,6 @@ CREATE TABLE developers(
 	specialty VARCHAR(50) NOT NULL,
 	salary DECIMAL(10, 2) NOT NULL
 );
-
-COMMIT;
 
 INSERT INTO developers(id, first_name, last_name, specialty, salary)
 VALUES 	
@@ -29,6 +27,7 @@ CREATE TABLE projects(
 );
 
 INSERT INTO projects (id, name, info) values (1, 'JBoss', 'RedHat implamintation of WildFly'),(2,'Openshift', 'RedHat cloud devops platform');
+SELECT * FROM projects;
 
 USE jdbc_tutorial;
 CREATE TABLE developer_projects(
@@ -40,14 +39,19 @@ CREATE TABLE developer_projects(
 );
 
 INSERT INTO developer_projects (developer_id, project_id) values (1,1),(2,1),(3,1),(4,2);
+SELECT * FROM developer_projects;
 
 USE jdbc_tutorial;
 CREATE TABLE developer_avatar(
 	developer_id INT NOT NULL,
-	avatar blob  (1G),
-	cv CLOB (1G CHARACTERS),
+	avatar BLOB (1000000),
+	cv TEXT (1000000),
 	PRIMARY KEY(developer_id),
-	FOREIGN KEY(developer_id) REFERENCES developers (id),
+	FOREIGN KEY(developer_id) REFERENCES developers (id)
 );
 
+SELECT * FROM developer_avatar;
+
 DROP SCHEMA `jdbc_tutorial`;
+
+COMMIT;
