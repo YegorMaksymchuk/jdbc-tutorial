@@ -57,9 +57,12 @@ public class JdbcDemo {
 //        printMap(storedProcedureUtil.callStoredProcedure("show_developers_by_project"));
 
         BlobUtil blobUtil = new BlobUtil();
-        String photoPath = "src/main/resources/developerdata/test.JPG";
+        String photoPath = "src/main/resources/developerdata/test.JPEG";
         String cvPath = "src/main/resources/developerdata/test.pdf";
-        blobUtil.addDeveloperData(developerDAO.getById(5L), photoPath, cvPath);
+        blobUtil.addDeveloperData(developerDAO.getById(2L), photoPath, cvPath);
+
+        blobUtil.getCV(developerDAO.getById(2L));
+        blobUtil.getPhoto(developerDAO.getById(2L));
 
     }
 

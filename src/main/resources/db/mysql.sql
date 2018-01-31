@@ -27,6 +27,7 @@ CREATE TABLE projects(
 );
 
 INSERT INTO projects (id, name, info) values (1, 'JBoss', 'RedHat implamintation of WildFly'),(2,'Openshift', 'RedHat cloud devops platform');
+
 SELECT * FROM projects;
 
 USE jdbc_tutorial;
@@ -42,15 +43,15 @@ INSERT INTO developer_projects (developer_id, project_id) values (1,1),(2,1),(3,
 SELECT * FROM developer_projects;
 
 USE jdbc_tutorial;
-CREATE TABLE developer_avatar(
+CREATE TABLE developer_data(
 	developer_id INT NOT NULL,
-	avatar BLOB (1000000),
-	cv TEXT (1000000),
+	photo BLOB (1000000),
+	resume BLOB (1000000),
 	PRIMARY KEY(developer_id),
 	FOREIGN KEY(developer_id) REFERENCES developers (id)
 );
 
-SELECT * FROM developer_avatar;
+SELECT * FROM developer_data;
 
 DROP SCHEMA `jdbc_tutorial`;
 
