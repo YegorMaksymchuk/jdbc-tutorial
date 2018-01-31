@@ -2,9 +2,12 @@ package jdbctutorial.application;
 
 
 import jdbctutorial.application.dao.DeveloperDAO;
+import jdbctutorial.application.dao.ProjectDAO;
 import jdbctutorial.application.dao.impl.DeveloperDAOImpl;
+import jdbctutorial.application.dao.impl.ProjectDAOImpl;
 import jdbctutorial.application.model.Developer;
 import jdbctutorial.application.utils.BlobUtil;
+import jdbctutorial.application.utils.StoredProcedureUtil;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -45,24 +48,24 @@ public class JdbcDemo {
     public static void main(String[] args) throws SQLException, IOException {
         DeveloperDAO developerDAO = new DeveloperDAOImpl();
         showAllDev(developerDAO);
-//        showDevById(developerDAO, 1L);
-//        developerDAO.save(createDeveloper(7L,"Petro", "Ivanov", "Go", BigDecimal.valueOf(3000.00)));
-//        showAllDev(developerDAO);
-//        showAndUpdateDevSpecialty(developerDAO.getById(1L), "Ruby", developerDAO);
+        showDevById(developerDAO, 1L);
+        developerDAO.save(createDeveloper(7L,"Petro", "Ivanov", "Go", BigDecimal.valueOf(3000.00)));
+        showAllDev(developerDAO);
+        showAndUpdateDevSpecialty(developerDAO.getById(1L), "Ruby", developerDAO);
+
+        ProjectDAO projectDAO = new ProjectDAOImpl();
+        System.out.println(projectDAO.getById(1l));
+        StoredProcedureUtil storedProcedureUtil = new StoredProcedureUtil();
+        storedProcedureUtil.createStoredProcedure();
+        printMap(storedProcedureUtil.callStoredProcedure("show_developers_by_project"));
+
+//        BlobUtil blobUtil = new BlobUtil();
+//        String photoPath = "src/main/resources/developerdata/test.JPEG";
+//        String cvPath = "src/main/resources/developerdata/test.pdf";
+//        blobUtil.addDeveloperData(developerDAO.getById(1L), photoPath, cvPath);
 //
-//        ProjectDAO projectDAO = new ProjectDAOImpl();
-//        System.out.println(projectDAO.getById(1l));
-//        StoredProcedureUtil storedProcedureUtil = new StoredProcedureUtil();
-//        storedProcedureUtil.createStoredProcedure();
-//        printMap(storedProcedureUtil.callStoredProcedure("show_developers_by_project"));
-
-        BlobUtil blobUtil = new BlobUtil();
-        String photoPath = "src/main/resources/developerdata/test.JPEG";
-        String cvPath = "src/main/resources/developerdata/test.pdf";
-        blobUtil.addDeveloperData(developerDAO.getById(2L), photoPath, cvPath);
-
-        blobUtil.getCV(developerDAO.getById(2L));
-        blobUtil.getPhoto(developerDAO.getById(2L));
+//        blobUtil.getCV(developerDAO.getById(1L));
+//        blobUtil.getPhoto(developerDAO.getById(1L));
 
     }
 

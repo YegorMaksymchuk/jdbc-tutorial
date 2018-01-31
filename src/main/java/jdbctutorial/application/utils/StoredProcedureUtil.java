@@ -54,8 +54,6 @@ public class StoredProcedureUtil {
                 connection.close();
             }
         }
-
-
         return developersByProject;
     }
 
